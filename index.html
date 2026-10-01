@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Typography - Justin Talan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..600&family=Space+Grotesk:wght@400..700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="sticky top-0 z-50 bg-ink border-b border-indigo">
+    <nav class="mx-auto max-w-6xl px-6 py-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <p class="label font-display font-bold uppercase text-cream">DIGITAL TYPOGRAPHY - JUSTIN TALAN</p>
+
+      <div class="flex flex-wrap gap-6">
+        <a href="#section-2" class="group lowercase text-steel">
+          <span class="block overflow-hidden h-[1.5em] leading-[1.5em]">
+            <span class="flex flex-col transition-transform duration-300 ease-out group-hover:-translate-y-1/2 motion-reduce:transition-none">
+              <span>Link 1</span>
+              <span class="text-cream" aria-hidden="true">Link 1</span>
+            </span>
+          </span>
+        </a>
+        <a href="#section-3" class="group lowercase text-steel">
+          <span class="block overflow-hidden h-[1.5em] leading-[1.5em]">
+            <span class="flex flex-col transition-transform duration-300 ease-out group-hover:-translate-y-1/2 motion-reduce:transition-none">
+              <span>Link 2</span>
+              <span class="text-cream" aria-hidden="true">Link 2</span>
+            </span>
+          </span>
+        </a>
+        <a href="#section-4" class="group lowercase text-steel">
+          <span class="block overflow-hidden h-[1.5em] leading-[1.5em]">
+            <span class="flex flex-col transition-transform duration-300 ease-out group-hover:-translate-y-1/2 motion-reduce:transition-none">
+              <span>Link 3</span>
+              <span class="text-cream" aria-hidden="true">Link 3</span>
+            </span>
+          </span>
+        </a>
+        <a href="#section-5" class="group lowercase text-steel">
+          <span class="block overflow-hidden h-[1.5em] leading-[1.5em]">
+            <span class="flex flex-col transition-transform duration-300 ease-out group-hover:-translate-y-1/2 motion-reduce:transition-none">
+              <span>Link 4</span>
+              <span class="text-cream" aria-hidden="true">Link 4</span>
+            </span>
+          </span>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button type="button" aria-label="Pause Music" class="size-10 rounded-full border border-cream text-cream grid place-items-center hover:bg-cream hover:text-ink transition-colors">
+          <span aria-hidden="true">❚❚</span>
+          <span class="sr-only">Pause Music</span>
+        </button>
+        <a href="#home" class="border border-cream text-cream px-8 py-2 rounded-sm hover:bg-cream hover:text-ink transition-colors">HOME</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="px-6 py-24 bg-[radial-gradient(ellipse_at_top,var(--color-violet),var(--color-plum)_35%,var(--color-ink)_70%)]">
+      <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
+        <p class="label uppercase text-steel text-sm tracking-[0.15em]">Chosen topic</p>
+        <h1 class="mt-4 font-display text-[clamp(2.75rem,14vw,4rem)] md:text-[clamp(4rem,10vw,9rem)] leading-[0.95]">
+          <span class="block overflow-hidden pb-[0.15em] -mb-[0.15em]"><span class="block animate-rise motion-reduce:animate-none">Digital</span></span>
+          <span class="block overflow-hidden pb-[0.15em] -mb-[0.15em]"><span class="block animate-rise [animation-delay:150ms] motion-reduce:animate-none">Typography</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl">[PLACEHOLDER: short description of the topic, to be replaced]</p>
+        <button type="button" class="mt-8 bg-cream text-ink px-10 py-4 rounded-sm hover:-translate-y-0.5 transition-transform">Learn more</button>
+
+        <div class="mt-12 w-full max-w-3xl border border-indigo rounded-md bg-violet/40 text-left">
+          <div class="flex gap-2 px-4 py-3 border-b border-indigo" aria-hidden="true">
+            <span class="size-3 rounded-full border border-steel"></span>
+            <span class="size-3 rounded-full border border-steel"></span>
+            <span class="size-3 rounded-full border border-steel"></span>
+          </div>
+          <div class="p-6">
+            <img src="images/Digital-Typography.png" alt="Digital-Typography" class="mx-auto max-w-full h-auto border border-indigo">
+            <!-- Interactive headline box (cursor-repel letters) to be added -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Typeface categories" class="overflow-hidden border-y border-indigo py-6">
+      <div class="flex w-max animate-marquee hover:[animation-play-state:paused] motion-reduce:animate-none">
+        <ul class="flex items-center font-display text-cream text-4xl md:text-6xl">
+          <li class="px-6">Serif</li>
+          <li class="text-steel text-2xl" aria-hidden="true">•</li>
+          <li class="px-6">Sans Serif</li>
+          <li class="text-steel text-2xl" aria-hidden="true">•</li>
+          <li class="px-6">Script</li>
+          <li class="text-steel text-2xl" aria-hidden="true">•</li>
+          <li class="px-6">ALL CAPS</li>
+          <li class="text-steel text-2xl" aria-hidden="true">•</li>
+          <li class="px-6">Fancy</li>
+          <li class="text-steel text-2xl" aria-hidden="true">•</li>
+        </ul>
+        <ul class="flex items-center font-display text-cream text-4xl md:text-6xl" aria-hidden="true">
+          <li class="px-6">Serif</li>
+          <li class="text-steel text-2xl">•</li>
+          <li class="px-6">Sans Serif</li>
+          <li class="text-steel text-2xl">•</li>
+          <li class="px-6">Script</li>
+          <li class="text-steel text-2xl">•</li>
+          <li class="px-6">ALL CAPS</li>
+          <li class="text-steel text-2xl">•</li>
+          <li class="px-6">Fancy</li>
+          <li class="text-steel text-2xl">•</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="section-2">
+      <!-- Section 2: What Is Typography (to be built) -->
+    </section>
+  </main>
+
+  <!-- Background music audio element to be added -->
+</body>
+</html>
