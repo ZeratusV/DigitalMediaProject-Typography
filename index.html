@@ -1,123 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Typography - Justin Talan</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..600&family=Space+Grotesk:wght@400..700&display=swap">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Pacifico&family=Oswald:wght@500&family=Merriweather&family=Inter&family=Caveat&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    .roll { display: inline-block; overflow: hidden; height: 1.5em; line-height: 1.5em; text-decoration: none; }
+    .roll span { display: block; transition: transform .3s; }
+    .roll span::after { content: attr(data-t); display: block; color: #ffe69c; }
+    .roll:hover span { transform: translateY(-100%); }
+    .rise { display: block; animation: rise .8s ease-out both; }
+    .marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+    .marquee:hover { animation-play-state: paused; }
+    .letter { display: inline-block; transition: transform .25s ease-out; }
+    @keyframes rise { from { opacity: 0; transform: translateY(60%); } }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .rise, .marquee { animation: none; } }
+  </style>
 </head>
-<body>
-  <header class="sticky top-0 z-50 bg-ink border-b border-indigo">
-    <nav class="mx-auto max-w-6xl px-6 py-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-      <p class="label font-display font-bold uppercase text-cream">DIGITAL TYPOGRAPHY - JUSTIN TALAN</p>
-
-      <div class="flex flex-wrap gap-6">
-        <a href="#section-2" class="group lowercase text-steel">
-          <span class="block overflow-hidden h-[1.5em] leading-[1.5em]">
-            <span class="flex flex-col transition-transform duration-300 ease-out group-hover:-translate-y-1/2 motion-reduce:transition-none">
-              <span>Link 1</span>
-              <span class="text-cream" aria-hidden="true">Link 1</span>
-            </span>
-          </span>
-        </a>
-        <a href="#section-3" class="group lowercase text-steel">
-          <span class="block overflow-hidden h-[1.5em] leading-[1.5em]">
-            <span class="flex flex-col transition-transform duration-300 ease-out group-hover:-translate-y-1/2 motion-reduce:transition-none">
-              <span>Link 2</span>
-              <span class="text-cream" aria-hidden="true">Link 2</span>
-            </span>
-          </span>
-        </a>
-        <a href="#section-4" class="group lowercase text-steel">
-          <span class="block overflow-hidden h-[1.5em] leading-[1.5em]">
-            <span class="flex flex-col transition-transform duration-300 ease-out group-hover:-translate-y-1/2 motion-reduce:transition-none">
-              <span>Link 3</span>
-              <span class="text-cream" aria-hidden="true">Link 3</span>
-            </span>
-          </span>
-        </a>
-        <a href="#section-5" class="group lowercase text-steel">
-          <span class="block overflow-hidden h-[1.5em] leading-[1.5em]">
-            <span class="flex flex-col transition-transform duration-300 ease-out group-hover:-translate-y-1/2 motion-reduce:transition-none">
-              <span>Link 4</span>
-              <span class="text-cream" aria-hidden="true">Link 4</span>
-            </span>
-          </span>
-        </a>
+<body id="top">
+  <nav class="navbar navbar-expand-md sticky-top border-bottom bg-black">
+    <div class="container">
+      <a class="navbar-brand text-warning-emphasis fw-bold text-uppercase" href="#top">Digital Typography - Justin Talan</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="#what"><span class="roll"><span data-t="link 1">link 1</span></span></a></li>
+          <li class="nav-item"><a class="nav-link" href="#types"><span class="roll"><span data-t="link 2">link 2</span></span></a></li>
+          <li class="nav-item"><a class="nav-link" href="#hierarchy"><span class="roll"><span data-t="link 3">link 3</span></span></a></li>
+          <li class="nav-item"><a class="nav-link" href="#playground"><span class="roll"><span data-t="link 4">link 4</span></span></a></li>
+        </ul>
+        <button id="pause" class="btn btn-outline-warning rounded-circle me-2" aria-label="Toggle music">❚❚</button>
+        <a class="btn btn-outline-warning" href="#top">HOME</a>
       </div>
+    </div>
+  </nav>
 
-      <div class="flex items-center gap-3">
-        <button type="button" aria-label="Pause Music" class="size-10 rounded-full border border-cream text-cream grid place-items-center hover:bg-cream hover:text-ink transition-colors">
-          <span aria-hidden="true">❚❚</span>
-          <span class="sr-only">Pause Music</span>
-        </button>
-        <a href="#home" class="border border-cream text-cream px-8 py-2 rounded-sm hover:bg-cream hover:text-ink transition-colors">HOME</a>
+  <header class="py-5 text-center text-bg-dark" style="background: radial-gradient(circle at top, #3f2e56, #000 70%)">
+    <div class="container py-5">
+      <p class="text-uppercase small text-secondary">Chosen topic</p>
+      <h1 class="display-1 fw-bold text-warning-emphasis overflow-hidden"><span class="rise">Digital</span><span class="rise" style="animation-delay:.15s">Typography</span></h1>
+      <p class="lead text-secondary">[PLACEHOLDER: short description of the topic]</p>
+      <a href="#what" id="learn" class="btn btn-warning btn-lg mt-3">Learn more</a>
+      <div class="card mx-auto mt-5 text-start border-secondary" style="max-width: 720px">
+        <div class="card-header text-secondary">&#9679; &#9679; &#9679;</div>
+        <div class="card-body text-center py-5" id="repel" style="font-family:'Playfair Display'"><span class="display-4 text-warning-emphasis">Letters move away from your mouse</span></div>
       </div>
-    </nav>
+    </div>
   </header>
 
-  <main>
-    <section id="home" class="px-6 py-24 bg-[radial-gradient(ellipse_at_top,var(--color-violet),var(--color-plum)_35%,var(--color-ink)_70%)]">
-      <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
-        <p class="label uppercase text-steel text-sm tracking-[0.15em]">Chosen topic</p>
-        <h1 class="mt-4 font-display text-[clamp(2.75rem,14vw,4rem)] md:text-[clamp(4rem,10vw,9rem)] leading-[0.95]">
-          <span class="block overflow-hidden pb-[0.15em] -mb-[0.15em]"><span class="block animate-rise motion-reduce:animate-none">Digital</span></span>
-          <span class="block overflow-hidden pb-[0.15em] -mb-[0.15em]"><span class="block animate-rise [animation-delay:150ms] motion-reduce:animate-none">Typography</span></span>
-        </h1>
-        <p class="mt-6 max-w-xl">[PLACEHOLDER: short description of the topic, to be replaced]</p>
-        <button type="button" class="mt-8 bg-cream text-ink px-10 py-4 rounded-sm hover:-translate-y-0.5 transition-transform">Learn more</button>
+  <div class="overflow-hidden border-top border-bottom py-3">
+    <div class="marquee">
+      <div class="d-flex align-items-center"><span class="px-4 display-5">Serif</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Sans Serif</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Script</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">ALL CAPS</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Fancy</span><span class="text-secondary display-5">&bull;</span></div>
+      <div class="d-flex align-items-center" aria-hidden="true"><span class="px-4 display-5">Serif</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Sans Serif</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Script</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">ALL CAPS</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Fancy</span><span class="text-secondary display-5">&bull;</span></div>
+    </div>
+  </div>
 
-        <div class="mt-12 w-full max-w-3xl border border-indigo rounded-md bg-violet/40 text-left">
-          <div class="flex gap-2 px-4 py-3 border-b border-indigo" aria-hidden="true">
-            <span class="size-3 rounded-full border border-steel"></span>
-            <span class="size-3 rounded-full border border-steel"></span>
-            <span class="size-3 rounded-full border border-steel"></span>
-          </div>
-          <div class="p-6">
-            <img src="images/Digital-Typography.png" alt="Digital-Typography" class="mx-auto max-w-full h-auto border border-indigo">
-            <!-- Interactive headline box (cursor-repel letters) to be added -->
-          </div>
-        </div>
+  <section id="what" class="row g-0 m-0">
+    <div class="col-md-6 bg-black d-flex align-items-center justify-content-center p-5">
+      <img src="images/Digital-Typography.png" alt="Digital font sample" class="img-fluid rounded" style="max-width:300px">
+    </div>
+    <div class="col-md-6 d-flex align-items-center p-5" style="font-family:'Space Grotesk'">
+      <div>
+        <h2>What is Typography</h2>
+        <p class="text-secondary">[PLACEHOLDER: description]</p>
+        <a href="#types" class="btn btn-outline-warning">Learn More</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section aria-label="Typeface categories" class="overflow-hidden border-y border-indigo py-6">
-      <div class="flex w-max animate-marquee hover:[animation-play-state:paused] motion-reduce:animate-none">
-        <ul class="flex items-center font-display text-cream text-4xl md:text-6xl">
-          <li class="px-6">Serif</li>
-          <li class="text-steel text-2xl" aria-hidden="true">•</li>
-          <li class="px-6">Sans Serif</li>
-          <li class="text-steel text-2xl" aria-hidden="true">•</li>
-          <li class="px-6">Script</li>
-          <li class="text-steel text-2xl" aria-hidden="true">•</li>
-          <li class="px-6">ALL CAPS</li>
-          <li class="text-steel text-2xl" aria-hidden="true">•</li>
-          <li class="px-6">Fancy</li>
-          <li class="text-steel text-2xl" aria-hidden="true">•</li>
-        </ul>
-        <ul class="flex items-center font-display text-cream text-4xl md:text-6xl" aria-hidden="true">
-          <li class="px-6">Serif</li>
-          <li class="text-steel text-2xl">•</li>
-          <li class="px-6">Sans Serif</li>
-          <li class="text-steel text-2xl">•</li>
-          <li class="px-6">Script</li>
-          <li class="text-steel text-2xl">•</li>
-          <li class="px-6">ALL CAPS</li>
-          <li class="text-steel text-2xl">•</li>
-          <li class="px-6">Fancy</li>
-          <li class="text-steel text-2xl">•</li>
-        </ul>
+  <section id="types" class="container py-5" style="font-family:'Oswald'">
+    <h2 class="text-center">Types of Typography</h2>
+    <p class="text-center text-secondary mb-4">Show types of digital fonts here</p>
+    <div class="row g-4">
+      <div class="col-6 col-lg-3"><div class="card h-100 border-warning-subtle"><div class="card-body text-center">
+        <h3 class="fs-2" style="font-family:serif">Serif</h3><p class="text-secondary small">[PLACEHOLDER]</p>
+        <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#typeModal" data-name="Serif" data-font="serif">Open</button></div></div></div>
+      <div class="col-6 col-lg-3"><div class="card h-100 border-warning-subtle"><div class="card-body text-center">
+        <h3 class="fs-2" style="font-family:sans-serif">Sans Serif</h3><p class="text-secondary small">[PLACEHOLDER]</p>
+        <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#typeModal" data-name="Sans Serif" data-font="sans-serif">Open</button></div></div></div>
+      <div class="col-6 col-lg-3"><div class="card h-100 border-warning-subtle"><div class="card-body text-center">
+        <h3 class="fs-2" style="font-family:Caveat">Script</h3><p class="text-secondary small">[PLACEHOLDER]</p>
+        <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#typeModal" data-name="Script" data-font="Caveat">Open</button></div></div></div>
+      <div class="col-6 col-lg-3"><div class="card h-100 border-warning-subtle"><div class="card-body text-center">
+        <h3 class="fs-2" style="font-family:Pacifico">Fancy</h3><p class="text-secondary small">[PLACEHOLDER]</p>
+        <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#typeModal" data-name="Fancy" data-font="Pacifico">Open</button></div></div></div>
+    </div>
+  </section>
+
+  <section id="hierarchy" class="row g-0 m-0 border-top">
+    <div class="col-md-6 d-flex align-items-center p-5" id="hier" style="font-family:'Merriweather'">
+      <div>
+        <h2>Typography Hierarchy</h2>
+        <p class="text-secondary">[PLACEHOLDER: short description of serif and sans serif fonts]</p>
+        <button id="toggle" class="btn btn-outline-warning me-2">Toggle Serif / Sans</button>
+        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#hierModal">Show hierarchy</button>
       </div>
-    </section>
+    </div>
+    <div class="col-md-6 bg-black d-flex align-items-center justify-content-center p-5">
+      <svg viewBox="0 0 200 160" width="260" role="img" aria-label="Letter anatomy">
+        <text x="100" y="120" font-size="130" text-anchor="middle" fill="#ffe69c" font-family="serif">A</text>
+        <g stroke="#adb5bd"><line x1="30" y1="30" x2="65" y2="30"/><line x1="30" y1="120" x2="65" y2="120"/><line x1="135" y1="95" x2="175" y2="95"/></g>
+        <g fill="#adb5bd" font-size="9"><text x="2" y="26">ascender</text><text x="2" y="136">baseline</text><text x="140" y="90">crossbar</text></g>
+      </svg>
+    </div>
+  </section>
 
-    <section id="section-2">
-      <!-- Section 2: What Is Typography (to be built) -->
-    </section>
-  </main>
+  <section class="container py-5" style="font-family:'Caveat'">
+    <h2 class="text-center mb-4 display-6">Typographical Concepts</h2>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4"><div class="card h-100"><div class="card-body text-center"><h3>Leading</h3><p class="text-secondary">[PLACEHOLDER]</p></div></div></div>
+      <div class="col-md-4"><div class="card h-100"><div class="card-body text-center"><h3>Tracking</h3><p class="text-secondary">[PLACEHOLDER]</p></div></div></div>
+      <div class="col-md-4"><div class="card h-100"><div class="card-body text-center"><h3>Kerning</h3><p class="text-secondary">[PLACEHOLDER]</p></div></div></div>
+    </div>
+  </section>
 
-  <!-- Background music audio element to be added -->
+  <section class="container py-5">
+    <div class="row align-items-center g-4">
+      <div class="col-md-5"><img src="images/lead-type.png" alt="Printing press lead type" class="img-fluid rounded"></div>
+      <div class="col-md-7" style="font-family:'Playfair Display'">
+        <h2>Typeface vs Font</h2>
+        <p class="text-secondary">[PLACEHOLDER: short explanation of the difference]</p>
+        <ul><li>Typeface = the font family</li><li>Font = specific weight, size, style</li><li>Where the word "font" came from</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="playground" class="py-5 border-top border-bottom" style="font-family:'Inter'">
+    <div class="container" style="max-width:520px">
+      <h2 class="text-center mb-4">Try It Yourself: Typography Playground</h2>
+      <div class="border border-secondary-subtle rounded p-4 mb-3 text-center" style="min-height:90px"><span id="target" class="fs-2">Sample word</span></div>
+      <label class="form-label" for="word">Your word</label>
+      <input id="word" class="form-control mb-3" placeholder="Type your word here">
+      <label class="form-label" for="font">Font (pick the match)</label>
+      <select id="font" class="form-select mb-2"><option>Inter</option><option>Playfair Display</option><option>Pacifico</option><option>Oswald</option></select>
+      <div class="mb-3">
+        <button class="btn btn-outline-secondary btn-sm fbtn" data-f="Merriweather">Font A</button>
+        <button class="btn btn-outline-secondary btn-sm fbtn" data-f="Caveat">Font B</button>
+        <button class="btn btn-outline-secondary btn-sm fbtn" data-f="Oswald">Font C</button>
+      </div>
+      <label class="form-label" for="lh">Line-height</label>
+      <input id="lh" type="range" class="form-range" min="0.8" max="2.5" step="0.1" value="1.2">
+      <label class="form-label" for="ls">Letter-spacing</label>
+      <input id="ls" type="range" class="form-range" min="-2" max="20" step="1" value="0">
+    </div>
+  </section>
+
+  <section class="container py-5 text-center">
+    <h2 class="mb-4">Technical Media Spec</h2>
+    <table class="table table-bordered align-middle" style="max-width:720px;margin:auto">
+      <thead class="table-dark"><tr><th>Asset &amp; format</th><th>Original to compressed</th><th>Color depth</th><th>Compression</th></tr></thead>
+      <tbody>
+        <tr><td>Hero image (.webp)</td><td>size</td><td>depth</td><td>algorithm</td></tr>
+        <tr><td>Audio clip (.mp3)</td><td>size</td><td>depth</td><td>algorithm</td></tr>
+        <tr><td>SVG diagram (.svg)</td><td>size</td><td>depth</td><td>algorithm</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="py-5 text-center text-secondary border-top">
+    <h3 class="text-body">DIGITAL TYPOGRAPHY</h3>
+    <small>&copy; 2024 Justin Xavier Talan - Midterm Exam<br>Web Systems and Technologies: Digital Media</small>
+  </footer>
+
+  <div class="modal fade" id="typeModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title" id="typeTitle"></h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><p>[PLACEHOLDER: description of what it is]</p><p class="display-4 text-warning-emphasis" id="typeSample">Sample picture</p></div>
+  </div></div></div>
+  <div class="modal fade" id="hierModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Typography Hierarchy</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><p class="display-5">Heading</p><p class="fs-4">Subheading</p><p>Body text. [PLACEHOLDER: show hierarchy here]</p></div>
+  </div></div></div>
+
+  <audio id="bg" loop></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+
+    // hero: letters move away from the mouse
+    const rep = $('repel'), txt = rep.firstElementChild;
+    txt.innerHTML = [...txt.textContent].map(c => c === ' ' ? ' ' : `<span class="letter">${c}</span>`).join('');
+    const letters = txt.querySelectorAll('.letter');
+    rep.onmousemove = e => letters.forEach(l => {
+      const r = l.getBoundingClientRect();
+      const dx = r.x + r.width / 2 - e.clientX, dy = r.y + r.height / 2 - e.clientY;
+      const d = Math.hypot(dx, dy) || 1, f = Math.max(0, 1 - d / 120) * 40;
+      l.style.transform = `translate(${dx / d * f}px, ${dy / d * f}px)`;
+    });
+    rep.onmouseleave = () => letters.forEach(l => l.style.transform = '');
+
+    // background music (set the src on the <audio> tag to an mp3)
+    const bg = $('bg'), pause = $('pause');
+    $('learn').onclick = () => { bg.play().catch(() => {}); pause.textContent = '❚❚'; };
+    pause.onclick = () => {
+      if (bg.paused) { bg.play().catch(() => {}); pause.textContent = '❚❚'; }
+      else { bg.pause(); pause.textContent = '▶'; }
+    };
+
+    // type modals + hierarchy toggle
+    $('typeModal').addEventListener('show.bs.modal', e => {
+      $('typeTitle').textContent = e.relatedTarget.dataset.name;
+      $('typeSample').style.fontFamily = e.relatedTarget.dataset.font;
+    });
+    $('toggle').onclick = () => {
+      const h = $('hier');
+      h.style.fontFamily = h.style.fontFamily.includes('Merriweather') ? 'sans-serif' : "'Merriweather'";
+    };
+
+    // playground
+    const t = $('target');
+    $('word').oninput = e => t.textContent = e.target.value || 'Sample word';
+    $('font').onchange = e => t.style.fontFamily = e.target.value;
+    document.querySelectorAll('.fbtn').forEach(b => b.onclick = () => t.style.fontFamily = b.dataset.f);
+    $('lh').oninput = e => t.style.lineHeight = e.target.value;
+    $('ls').oninput = e => t.style.letterSpacing = e.target.value + 'px';
+  </script>
 </body>
 </html>

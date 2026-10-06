@@ -3,16 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "build": "npx @tailwindcss/cli -i ./src/input.css -o ./style.css",
-    "watch": "npx @tailwindcss/cli -i ./src/input.css -o ./style.css --watch"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "@tailwindcss/cli": "^4.3.3",
-    "tailwindcss": "^4.3.3"
-  }
+  "type": "commonjs"
 }
