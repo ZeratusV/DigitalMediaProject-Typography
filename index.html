@@ -5,8 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Typography - Justin Talan</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Playfair+Display:wght@700&family=Pacifico&family=Oswald:wght@500&family=Merriweather&family=Inter&family=Caveat&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Instrument+Serif&family=Pacifico&family=Oswald:wght@500&family=Merriweather&family=Caveat&display=swap" rel="stylesheet">
   <style>
+    /* palette */
+    [data-bs-theme=dark] {
+      --bs-body-bg: #131416; --bs-body-color: #8a8c93; --bs-secondary-color: #62646a; --bs-border-color: #26272c;
+      --bs-heading-color: #fff; --bs-emphasis-color: #fff; --bs-body-font-family: 'Inter', sans-serif; --bs-border-radius: 8px;
+    }
+    /* micro-typography: leading, kerning, tracking */
+    body { font-family: 'Inter', sans-serif; line-height: 1.5; font-kerning: normal; }
+    h1, h2, h3 { font-weight: 300; letter-spacing: -.02em; }
+    .btn, .nav-link, label { letter-spacing: .03em; }
+    .serif { display: block; font-family: 'Instrument Serif', serif; letter-spacing: 0; color: transparent; background: linear-gradient(90deg, #55575d, #b9bbc2); -webkit-background-clip: text; background-clip: text; }
+    .navbar { background: rgba(19, 20, 22, .9); font-size: .85rem; --bs-navbar-color: #8a8c93; --bs-navbar-hover-color: #fff; --bs-navbar-active-color: #fff; --bs-navbar-brand-color: #fff; --bs-navbar-brand-font-size: 1rem; }
+    .btn-ghost { font-size: .8rem; --bs-btn-color: #e0e0e0; --bs-btn-bg: #1f2024; --bs-btn-border-color: #383a42; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #2a2c30; --bs-btn-hover-border-color: #4b4a51; --bs-btn-active-color: #fff; --bs-btn-active-bg: #2a2c30; --bs-btn-active-border-color: #4b4a51; }
+    .panel { border: 1px solid #26272c; border-radius: 16px; background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, .07), transparent 60%), #0a0a0a; }
+    .tile { overflow: hidden; border: 1px solid #26272c; border-radius: 8px; background: #1a1b1f; color: #fff; font: inherit; transition: border-color .2s, transform .2s; }
+    .tile:hover { border-color: #4b4a51; transform: translateY(-3px); }
+    .demo { display: grid; place-items: center; height: 110px; border-bottom: 1px solid #26272c; background: #0a0a0a; color: #fff; font-size: 2.5rem; }
+    .window { overflow: hidden; border: 1px solid #26272c; border-radius: 12px; background: #000; }
+    .window-bar { padding: .4rem .8rem; background: #2a2c30; color: #62646a; font-size: .7rem; letter-spacing: .3em; }
+    .eclipse { background: radial-gradient(circle at 72% 80%, #131416 0 36%, transparent 36.3%), radial-gradient(ellipse 34% 9% at 44% 52%, rgba(255, 255, 255, .13), transparent 70%), linear-gradient(#27282d, #131416 75%); }
+    .glow { background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(255, 255, 255, .06), transparent 70%); }
+    .gray { filter: grayscale(1); }
+    .box { display: grid; place-items: center; min-height: 8.5rem; padding: 1rem; border: 1px dashed #4b4a51; border-radius: 8px; color: #fff; font-size: 1.5rem; line-height: 1.5; text-align: center; }
+    .form-control:focus, .form-select:focus { border-color: #4b4a51; box-shadow: none; }
+    .form-range::-webkit-slider-thumb { background: #fff; }
+    .form-range::-moz-range-thumb { background: #fff; }
+    .table { --bs-table-color: #8a8c93; }
+    .table thead { --bs-table-bg: #1a1b1f; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+    .table th { font-weight: 400; }
+    dialog { max-width: min(32rem, 90vw); padding: 1.5rem; border: 1px solid #26272c; border-radius: 12px; background: #1a1b1f; color: #8a8c93; }
+    dialog::backdrop { background: rgba(0, 0, 0, .6); }
+
+    /* slides and motion (clip, not hidden, so the browser can never scroll the deck itself) */
+    #deck { overflow: clip; }
     .slide { position: absolute; inset: 0; overflow-y: auto; visibility: hidden; transform: translateY(100%); transition: transform .6s ease, visibility 0s .6s; }
     .slide.above { transform: translateY(-100%); }
     .slide.active { transform: none; visibility: visible; transition-delay: 0s; }
@@ -15,47 +48,43 @@
     .fill { min-height: 100%; }
     .roll { display: inline-block; overflow: hidden; height: 1.5em; line-height: 1.5em; text-decoration: none; }
     .roll span { display: block; transition: transform .3s; }
-    .roll span::after { content: attr(data-t); display: block; color: #ffe69c; }
-    .roll:hover span { transform: translateY(-100%); }
-    .marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
-    .marquee:hover { animation-play-state: paused; }
+    .roll span::after { content: attr(data-t); display: block; color: #fff; }
+    .roll:hover span { transform: translateY(-50%); }
     @keyframes up { from { opacity: 0; transform: translateY(30px); } }
     @keyframes rise { from { opacity: 0; transform: translateY(60%); } }
-    @keyframes marquee { to { transform: translateX(-50%); } }
-    @media (prefers-reduced-motion: reduce) { .slide.active .in, .slide.active .rise, .marquee { animation: none; } .slide { transition: none; } }
+    @media (prefers-reduced-motion: reduce) { .slide.active .in, .slide.active .rise { animation: none; } .slide { transition: none; } }
   </style>
 </head>
 <body class="d-flex flex-column vh-100 overflow-hidden">
-  <nav class="navbar navbar-expand-md border-bottom bg-black">
+  <nav class="navbar navbar-expand-md border-bottom">
     <div class="container">
-      <a class="navbar-brand text-warning-emphasis fw-bold text-uppercase" href="#home">Digital Typography - Justin Talan</a>
+      <a class="navbar-brand fw-medium" href="#home">Digital Typography - Justin Talan</a>
       <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="menu">
-        <ul class="navbar-nav mx-auto">
+        <ul class="navbar-nav mx-auto gap-md-3">
           <li class="nav-item"><a class="nav-link" href="#what"><span class="roll"><span data-t="What">What</span></span></a></li>
           <li class="nav-item"><a class="nav-link" href="#types"><span class="roll"><span data-t="Types">Types</span></span></a></li>
           <li class="nav-item"><a class="nav-link" href="#hierarchy"><span class="roll"><span data-t="Hierarchy">Hierarchy</span></span></a></li>
           <li class="nav-item"><a class="nav-link" href="#playground"><span class="roll"><span data-t="Playground">Playground</span></span></a></li>
         </ul>
-        <button id="pause" class="btn btn-outline-warning rounded-circle me-2" aria-label="Toggle music">❚❚</button>
-        <a class="btn btn-outline-warning" href="#home">HOME</a>
+        <button id="pause" class="btn btn-ghost rounded-circle me-2" aria-label="Play music">▶&#xFE0E;</button>
+        <input id="volume" type="range" class="form-range me-3" style="width:90px" min="0" max="1" step="0.05" value="0.5" aria-label="Music volume">
+        <a class="btn btn-ghost" href="#home">HOME</a>
       </div>
     </div>
   </nav>
 
-  <main id="deck" class="flex-grow-1 position-relative overflow-hidden">
+  <main id="deck" class="flex-grow-1 position-relative">
   <section class="slide" id="home">
-  <header class="py-5 text-center text-bg-dark" style="background: radial-gradient(circle at top, #3f2e56, #000 70%)">
+  <header class="eclipse fill py-5 text-center">
     <div class="container py-5">
-      <p class="text-uppercase small text-secondary in">Chosen topic</p>
-      <h1 class="text-warning-emphasis overflow-hidden" style="font-family:'Bungee Shade'; font-size:clamp(2rem, 9vw, 5rem)"><span class="rise">Digital</span><span class="rise" style="animation-delay:.15s">Typography</span></h1>
-      <p class="lead text-secondary in">There's science and logic behind the way text looks, and every logo has a backstory.</p>
-      <a href="#what" id="learn" class="btn btn-warning btn-lg mt-3 in">Learn more</a>
-      <div class="card mx-auto mt-5 text-start border-secondary in" style="max-width: 720px">
-        <div class="card-header text-secondary">&#9679; &#9679; &#9679;</div>
-        <div id="screen" class="position-relative overflow-hidden bg-black rounded-bottom" style="height:320px">
+      <h1 class="overflow-hidden" style="font-size:clamp(2.2rem, 6vw, 4.5rem)"><span class="rise">Digital Typography</span><span class="rise serif" style="animation-delay:.15s">Your choice of font can easily change a conversation.</span></h1>
+      <a href="#what" id="learn" class="btn btn-light mt-3 in">Learn more</a>
+      <div class="window mx-auto mt-5 text-start in" style="max-width:720px">
+        <div class="window-bar">&#9679;&#9679;&#9679;</div>
+        <div id="screen" class="position-relative overflow-hidden" style="height:320px">
           <span class="dvd position-absolute top-0 start-0 fs-1 text-nowrap" style="font-family:serif">Serif</span>
           <span class="dvd position-absolute top-0 start-0 fs-1 text-nowrap" style="font-family:sans-serif">Sans Serif</span>
           <span class="dvd position-absolute top-0 start-0 fs-1 text-nowrap" style="font-family:Caveat">Script</span>
@@ -65,91 +94,75 @@
       </div>
     </div>
   </header>
-
-  <div class="overflow-hidden border-top border-bottom py-3">
-    <div class="marquee">
-      <div class="d-flex align-items-center"><span class="px-4 display-5">Serif</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Sans Serif</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Script</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">ALL CAPS</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Fancy</span><span class="text-secondary display-5">&bull;</span></div>
-      <div class="d-flex align-items-center" aria-hidden="true"><span class="px-4 display-5">Serif</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Sans Serif</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Script</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">ALL CAPS</span><span class="text-secondary display-5">&bull;</span><span class="px-4 display-5">Fancy</span><span class="text-secondary display-5">&bull;</span></div>
-    </div>
-  </div>
   </section>
 
   <section class="slide" id="what">
   <div class="row g-0 m-0 fill">
-    <div class="col-md-6 bg-black d-flex align-items-center justify-content-center p-5">
-      <img src="images/Digital-Typography.png" alt="Digital font sample" class="img-fluid rounded in" style="max-width:300px">
+    <div class="col-md-6 p-4">
+      <div class="panel h-100 d-flex align-items-center justify-content-center p-5">
+        <img src="images/typography.png" alt="Sample of a digital typeface" class="img-fluid rounded-3 gray in">
+      </div>
     </div>
-    <div class="col-md-6 d-flex align-items-center p-5" style="font-family:'Space Grotesk'">
+    <div class="col-md-6 d-flex align-items-center p-5">
       <div>
-        <h2 class="in">What is Typography</h2>
-        <p class="text-secondary in">Typography is the style and appearance of text, and the art of working with it: how it is designed. Century Gothic, for example, is used in grade school because its simple letter shapes help children recognize an "a" and not a "a".</p>
-        <a href="#types" class="btn btn-outline-warning in">Learn More</a>
+        <h2 class="in">What Is Typography?</h2>
+        <p class="in">Typography is the style of appearance of text. It is also the art of working with text.</p>
+        <a href="#types" class="btn btn-ghost in">Learn More</a>
       </div>
     </div>
   </div>
   </section>
 
   <section class="slide" id="types">
-  <div class="container py-5 fill d-flex flex-column justify-content-center" style="font-family:'Oswald'">
-    <h2 class="text-center in">Types of Typography</h2>
-    <p class="text-center text-secondary mb-4 in">Serif and sans serif are the two main types.</p>
-    <div class="row g-4">
-      <div class="col-6 col-lg-3 in"><div class="card h-100 border-warning-subtle"><div class="card-body text-center">
-        <h3 class="fs-2" style="font-family:serif">Serif</h3><p class="text-secondary small">Letterforms with small strokes at the ends.</p>
-        <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#typeModal" data-name="Serif" data-font="serif" data-desc="From the Dutch word schreef, meaning &quot;line&quot; or &quot;pen stroke&quot;. Serif letters have strokes at the ends called serifs. They are widely used for body text and are generally easier to read in print.">Open</button></div></div></div>
-      <div class="col-6 col-lg-3 in"><div class="card h-100 border-warning-subtle"><div class="card-body text-center">
-        <h3 class="fs-2" style="font-family:sans-serif">Sans Serif</h3><p class="text-secondary small">Styles without serifs.</p>
-        <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#typeModal" data-name="Sans Serif" data-font="sans-serif" data-desc="Sans is French for &quot;without&quot;, so there are no serif projections. Arguably more legible on computer screens: individual words are comprehended slightly faster and it scales better at low resolutions. Mobile systems adopted official fonts: iOS 2 (2010) Helvetica Neue, iOS 9 San Francisco, Android Roboto, Microsoft Arial, Windows 10 Segoe UI.">Open</button></div></div></div>
-      <div class="col-6 col-lg-3 in"><div class="card h-100 border-warning-subtle"><div class="card-body text-center">
-        <h3 class="fs-2" style="font-family:Caveat">Script</h3><p class="text-secondary small">Type that imitates handwriting.</p>
-        <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#typeModal" data-name="Script" data-font="Caveat" data-desc="From the Latin word scriptum, meaning &quot;writing&quot;. Script typefaces imitate handwriting.">Open</button></div></div></div>
-      <div class="col-6 col-lg-3 in"><div class="card h-100 border-warning-subtle"><div class="card-body text-center">
-        <h3 class="fs-2" style="font-family:Pacifico">Fancy</h3><p class="text-secondary small">Decorative type that stands out.</p>
-        <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#typeModal" data-name="Fancy" data-font="Pacifico" data-desc="Decorative styles meant to stand out. Also see ALL CAPS: type set entirely in uppercase letters.">Open</button></div></div></div>
+  <div class="container py-5 fill d-flex flex-column justify-content-center">
+    <h2 class="text-center mb-4 in">Types of Typography</h2>
+    <div class="row g-3">
+      <div class="col-6 col-lg-3 in"><h3 class="m-0 fs-5"><button class="tile d-block w-100 p-0 text-start" data-open="d-serif"><span class="demo" style="font-family:serif">Aa</span><span class="d-block p-3">Serif</span></button></h3></div>
+      <div class="col-6 col-lg-3 in"><h3 class="m-0 fs-5"><button class="tile d-block w-100 p-0 text-start" data-open="d-sans"><span class="demo" style="font-family:sans-serif">Aa</span><span class="d-block p-3">Sans Serif</span></button></h3></div>
+      <div class="col-6 col-lg-3 in"><h3 class="m-0 fs-5"><button class="tile d-block w-100 p-0 text-start" data-open="d-script"><span class="demo" style="font-family:Caveat">Aa</span><span class="d-block p-3">Script</span></button></h3></div>
+      <div class="col-6 col-lg-3 in"><h3 class="m-0 fs-5"><button class="tile d-block w-100 p-0 text-start" data-open="d-fancy"><span class="demo" style="font-family:Pacifico">Aa</span><span class="d-block p-3">Fancy</span></button></h3></div>
     </div>
   </div>
   </section>
 
   <section class="slide" id="hierarchy">
   <div class="row g-0 m-0">
-    <div class="col-md-6 d-flex align-items-center p-5" id="hier" style="font-family:'Merriweather'">
-      <div>
-        <h2 class="in">Typography Hierarchy</h2>
-        <p class="text-secondary in">Typographic hierarchy is a system that organizes type in order of importance. It helps reading and is an important technique for communicating content effectively.</p>
+    <div class="col-12 d-flex justify-content-center p-5">
+      <div style="max-width:44rem">
+        <h2 class="in">Typographic Hierarchy</h2>
+        <p class="in">Typographic hierarchy is a system for organizing type that establishes an order of importance. It allows the reader to find what they need and navigate through content, which makes it an important technique for communicating effectively.</p>
         <div class="in">
-          <button id="toggle" class="btn btn-outline-warning me-2">Toggle Serif / Sans</button>
-          <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#hierModal">Show hierarchy</button>
+          <button class="btn btn-ghost" data-open="d-tools">View the Five Tools</button>
         </div>
       </div>
     </div>
-    <div class="col-md-6 bg-black d-flex align-items-center justify-content-center p-5">
-      <svg class="in" viewBox="0 0 200 160" width="260" role="img" aria-label="Letter anatomy">
-        <text x="100" y="120" font-size="130" text-anchor="middle" fill="#ffe69c" font-family="serif">A</text>
-        <g stroke="#adb5bd"><line x1="30" y1="30" x2="65" y2="30"/><line x1="30" y1="120" x2="65" y2="120"/><line x1="135" y1="95" x2="175" y2="95"/></g>
-        <g fill="#adb5bd" font-size="9"><text x="2" y="26">ascender</text><text x="2" y="136">baseline</text><text x="140" y="90">crossbar</text></g>
-      </svg>
+  </div>
+
+  <div id="concepts" class="container py-5">
+    <h2 class="text-center mb-4 in">Typographical Concepts<span class="serif">LEADING - TRACKING - KERNING</span></h2>
+    <div class="row g-3 justify-content-center">
+      <div class="col-md-4 in"><div class="tile h-100">
+        <div class="demo" style="font-size:.9rem; line-height:2.4; text-align:center">line one<br>line two</div>
+        <div class="p-3"><h3 class="fs-5">Leading</h3><p class="small mb-0 text-body">Leading is the space between lines of text, more commonly known as line spacing. It affects legibility.</p></div></div></div>
+      <div class="col-md-4 in"><div class="tile h-100">
+        <div class="demo" style="font-size:1.5rem; letter-spacing:.5em">TRACK</div>
+        <div class="p-3"><h3 class="fs-5">Tracking</h3><p class="small mb-0 text-body">Tracking is the uniform space between characters.</p></div></div></div>
+      <div class="col-md-4 in"><div class="tile h-100">
+        <div class="demo" style="letter-spacing:-.14em">AV</div>
+        <div class="p-3"><h3 class="fs-5">Kerning</h3><p class="small mb-0 text-body">Kerning is the space between characters in a proportional font. Unlike tracking, the spacing is not uniform. Poor kerning leaves letters looking improperly spaced and can change how a word is read.</p></div></div></div>
     </div>
   </div>
 
-  <div class="container py-5" style="font-family:'Caveat'">
-    <h2 class="text-center mb-4 display-6 in">Typographical Concepts</h2>
-    <div class="row g-4 justify-content-center">
-      <div class="col-md-4 in"><div class="card h-100"><div class="card-body text-center"><h3>Leading</h3><p class="text-secondary">The space between lines of text (paragraph spacing). It affects legibility.</p></div></div></div>
-      <div class="col-md-4 in"><div class="card h-100"><div class="card-body text-center"><h3>Tracking</h3><p class="text-secondary">Uniform space between characters. T r a c k i n g</p></div></div></div>
-      <div class="col-md-4 in"><div class="card h-100"><div class="card-body text-center"><h3>Kerning</h3><p class="text-secondary">The proportionality of the spaces between characters, and the process of adjusting it.</p></div></div></div>
-    </div>
-  </div>
-
-  <div class="container py-5">
+  <div id="typeface-font" class="container py-5">
     <div class="row align-items-center g-4">
-      <div class="col-md-5 in"><img src="images/lead-type.png" alt="Printing press lead type" class="img-fluid rounded"></div>
-      <div class="col-md-7 in" style="font-family:'Playfair Display'">
+      <div class="col-md-5 in"><img src="images/glitch.png" alt="Glitch typeface alphabet and numbers" class="img-fluid rounded-3 border gray"></div>
+      <div class="col-md-7 in">
         <h2>Typeface vs Font</h2>
-        <p class="text-secondary">They are not the same thing.</p>
+        <p class="serif fs-5" style="background-image:linear-gradient(90deg,#d8dadf,#fff);-webkit-background-clip:text;background-clip:text">The two terms are commonly used as if they meant the same thing. Their roots point the same way: "typus" (Latin for impression or to strike), "facies" (Latin for form or appearance), and "fonte" (French for casting or founding).</p>
         <ul>
-          <li><b>Typeface</b> (Latin typus, "impression", and facies, "form"): a particular design of type, the collective name of a family of related fonts.</li>
-          <li><b>Font</b> (French fonte, "casting"): a set of type of one face and size, covering the weights, widths and styles of a typeface.</li>
-          <li>Type foundries cast characters in lead alloys called fonts. The word was first used in 1668. The advent of digital made the distinction erroneous.</li>
+          <li><strong>Typeface:</strong> a particular design of type, the face of a printing type, and the collective name for a family of related fonts.</li>
+          <li><strong>Font:</strong> a set of type of one particular face and size. In practice, the weights, widths, and styles that constitute a typeface.</li>
+          <li><strong>History:</strong> in early typesetting, type foundries cast characters in lead alloys, and these were called fonts. The term was first used in 1688 and historically meant a given alphabet and its characters in a single size. Digital, scalable fonts and inaccurate naming in operating systems later blurred the two terms.</li>
         </ul>
       </div>
     </div>
@@ -157,67 +170,128 @@
   </section>
 
   <section class="slide" id="playground">
-  <div class="py-5 border-bottom" style="font-family:'Inter'">
+  <div class="py-5">
     <div class="container" style="max-width:520px">
-      <h2 class="text-center mb-4 in">Try It Yourself: Typography Playground</h2>
-      <div class="border border-secondary-subtle rounded p-4 mb-3 text-center in" style="min-height:90px"><span id="target" class="fs-2">Sample word</span></div>
+      <h2 class="text-center mb-4 in">Try It Yourself</h2>
       <div class="in">
-        <label class="form-label" for="word">Your word</label>
-        <input id="word" class="form-control mb-3" placeholder="Type your word here">
+        <p class="form-label small mb-2">Target</p>
+        <div id="target" class="box mb-3" role="img" aria-label="Target: press Generate to start">Press Generate to start</div>
+        <p class="form-label small mb-2">Your attempt</p>
+        <div id="attempt" class="box mb-3" role="img"></div>
       </div>
       <div class="in">
-        <label class="form-label" for="font">Font (pick the match)</label>
-        <select id="font" class="form-select mb-2"><option>Inter</option><option>Playfair Display</option><option>Pacifico</option><option>Oswald</option></select>
-        <div class="mb-3">
-          <button class="btn btn-outline-secondary btn-sm fbtn" data-f="Merriweather">Font A</button>
-          <button class="btn btn-outline-secondary btn-sm fbtn" data-f="Caveat">Font B</button>
-          <button class="btn btn-outline-secondary btn-sm fbtn" data-f="Oswald">Font C</button>
-        </div>
+        <label class="form-label small" for="word">Your word</label>
+        <input id="word" class="form-control mb-3" maxlength="12" placeholder="Type your word here" disabled>
       </div>
       <div class="in">
-        <label class="form-label" for="lh">Line-height</label>
-        <input id="lh" type="range" class="form-range" min="0.8" max="2.5" step="0.1" value="1.2">
-        <label class="form-label" for="ls">Letter-spacing</label>
-        <input id="ls" type="range" class="form-range" min="-2" max="20" step="1" value="0">
+        <label class="form-label small" for="font">Font (pick the match)</label>
+        <select id="font" class="form-select mb-3" disabled>
+          <option value="" selected disabled>Select font</option>
+          <option data-font="'Merriweather', serif">Merriweather</option>
+          <option data-font="'Oswald', sans-serif">Oswald</option>
+          <option data-font="'Caveat', cursive">Caveat</option>
+        </select>
+      </div>
+      <div class="in">
+        <label class="form-label small" for="lh">Leading (line-height): <output id="lhv">1.5</output></label>
+        <input id="lh" type="range" class="form-range" min="1" max="2" step="0.25" value="1.5" disabled>
+        <label class="form-label small" for="ls">Tracking (letter-spacing): <output id="lsv">0</output></label>
+        <input id="ls" type="range" class="form-range mb-3" min="0" max="0.3" step="0.05" value="0" disabled>
+        <button type="button" id="chaos" class="btn btn-ghost">Generate</button>
+        <p id="result" class="mt-3 mb-0 text-white" aria-live="polite"></p>
       </div>
     </div>
   </div>
 
-  <div class="container py-5 text-center">
+  <div id="spec" class="container py-5 text-center border-top">
     <h2 class="mb-4 in">Technical Media Spec</h2>
-    <table class="table table-bordered align-middle in" style="max-width:720px;margin:auto">
-      <thead class="table-dark"><tr><th>Asset &amp; format</th><th>Original to compressed</th><th>Color depth</th><th>Compression</th></tr></thead>
-      <tbody>
-        <tr><td>Hero image (.webp)</td><td>size</td><td>depth</td><td>algorithm</td></tr>
-        <tr><td>Audio clip (.mp3)</td><td>size</td><td>depth</td><td>algorithm</td></tr>
-        <tr><td>SVG diagram (.svg)</td><td>size</td><td>depth</td><td>algorithm</td></tr>
+    <table class="table table-bordered text-start in" style="max-width:920px;margin:auto">
+      <caption class="visually-hidden">Technical media spec for the assets used on this site</caption>
+      <thead><tr><th scope="col">Asset Name &amp; File Format</th><th scope="col">Original Size &rarr; Compressed</th><th scope="col">Color Depth / Quantization</th><th scope="col">Compression Algorithm</th></tr></thead>
+      <tbody class="small">
+        <tr><th scope="row"><em>typography.png</em></th><td>585 KB to 55 KB</td><td>24-bit (8 bits per channel)</td><td>Lossless (DEFLATE: LZ77 + Huffman)</td></tr>
+        <tr><th scope="row"><em>glitch.png</em></th><td>1.04 MB to 147 KB</td><td>24-bit (8 bits per channel)</td><td>Lossless (DEFLATE: LZ77 + Huffman)</td></tr>
+        <tr><th scope="row"><em>1-04. Want To Be Close -Reload-.mp3</em></th><td>21.3 MB to 4.1 MB</td><td>16-bit, 44.1 kHz, stereo</td><td>Lossy, variable bitrate (MDCT + Huffman)</td></tr>
       </tbody>
     </table>
+    <p class="small mt-3 mb-0 in">Original size is the uncompressed size worked out from the pixel dimensions (width &times; height &times; 3 bytes) or the audio length (16-bit, 44.1 kHz, stereo).</p>
   </div>
 
-  <footer class="py-5 text-center text-secondary border-top">
-    <h3 class="text-body">DIGITAL TYPOGRAPHY</h3>
-    <small>&copy; 2024 Justin Xavier Talan - Midterm Exam<br>Web Systems and Technologies: Digital Media</small>
+  <footer class="glow border-top">
+    <div class="container py-5">
+      <p class="display-6 fw-light text-white py-4 mb-0">DIGITAL TYPOGRAPHY</p>
+      <div class="d-flex flex-wrap justify-content-between gap-2 border-top pt-3 small text-body-secondary">
+        <span>&copy; 2026 Justin Xavier Talan - Midterm Exam</span>
+        <span>Web Systems and Technologies: Digital Media</span>
+      </div>
+    </div>
   </footer>
   </section>
   </main>
 
-  <div class="modal fade" id="typeModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content">
-    <div class="modal-header"><h5 class="modal-title" id="typeTitle"></h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
-    <div class="modal-body"><p id="typeDesc"></p><p class="display-4 text-warning-emphasis" id="typeSample">Aa Bb Cc</p></div>
-  </div></div></div>
-  <div class="modal fade" id="hierModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content">
-    <div class="modal-header"><h5 class="modal-title">Typography Hierarchy</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
-    <div class="modal-body"><ul class="mb-0"><li><b>Font weight:</b> the thickness, such as bold</li><li><b>Typeface:</b> makes an element stand out from the rest</li><li><b>Font scale:</b> the size of the text</li><li><b>Color</b></li><li><b>Layout:</b> arrangement or placement gives prominence to certain elements, like a business card (today often just a name and a QR code)</li></ul></div>
-  </div></div></div>
+  <dialog id="d-serif" aria-labelledby="t-serif">
+    <h3 id="t-serif">Serif</h3>
+    <p>The word comes from the Dutch "schreef," meaning line or pen stroke. Serif typefaces have projections that finish off the strokes of a letter. They are widely used for body text and are generally considered easier to read in print.</p>
+    <svg viewBox="0 0 400 220" role="img" aria-labelledby="serif-svg-title serif-svg-desc" class="d-block mx-auto my-3" style="max-width:100%;height:auto">
+      <title id="serif-svg-title">Serif versus sans serif</title>
+      <desc id="serif-svg-desc">Two capital I letterforms. The left one has serif projections at both ends of the stem. The right one has none.</desc>
+      <g fill="#fff">
+        <rect x="100" y="45" width="20" height="110"/>
+        <rect x="70" y="45" width="80" height="10"/>
+        <rect x="70" y="145" width="80" height="10"/>
+        <rect x="280" y="45" width="20" height="110"/>
+      </g>
+      <g fill="none" stroke="#8a8c93" stroke-dasharray="4 3">
+        <circle cx="110" cy="50" r="44"/>
+        <circle cx="110" cy="150" r="44"/>
+      </g>
+      <line x1="150" y1="22" x2="185" y2="14" stroke="#8a8c93"/>
+      <g fill="#8a8c93" font-size="13" text-anchor="middle">
+        <text x="190" y="16" text-anchor="start">serif</text>
+        <text x="110" y="214">Serif</text>
+        <text x="290" y="214">Sans Serif</text>
+      </g>
+    </svg>
+    <form method="dialog"><button class="btn btn-ghost">Close</button></form>
+  </dialog>
+  <dialog id="d-sans" aria-labelledby="t-sans">
+    <h3 id="t-sans">Sans Serif</h3>
+    <p>"Sans" means "without" in French, so sans serif typefaces are styles without serif projections. They are arguably more legible on computer screens and scale better at low resolutions. A study found that comprehension times for individual words are slightly faster with sans serif types.</p>
+    <p class="display-4 text-white" style="font-family:sans-serif" aria-hidden="true">Aa Bb Cc</p>
+    <form method="dialog"><button class="btn btn-ghost">Close</button></form>
+  </dialog>
+  <dialog id="d-script" aria-labelledby="t-script">
+    <h3 id="t-script">Script</h3>
+    <p>The word comes from the Latin "scriptum," meaning writing. Script typefaces imitate handwriting.</p>
+    <p class="display-4 text-white" style="font-family:Caveat" aria-hidden="true">Aa Bb Cc</p>
+    <form method="dialog"><button class="btn btn-ghost">Close</button></form>
+  </dialog>
+  <dialog id="d-fancy" aria-labelledby="t-fancy">
+    <h3 id="t-fancy">Fancy</h3>
+    <p>Fancy typefaces are decorative styles designed for visual effect, typically used for titles and logos rather than body text.</p>
+    <p class="display-4 text-white" style="font-family:Pacifico" aria-hidden="true">Aa Bb Cc</p>
+    <form method="dialog"><button class="btn btn-ghost">Close</button></form>
+  </dialog>
+  <dialog id="d-tools" aria-labelledby="t-tools">
+    <h3 id="t-tools">The Five Tools of Hierarchy</h3>
+    <ul>
+      <li><strong>Font weight:</strong> the weight or thickness of the type.</li>
+      <li><strong>Typeface:</strong> a different typeface makes an element stand out among the rest.</li>
+      <li><strong>Font scale:</strong> a larger scale imposes importance compared to other elements.</li>
+      <li><strong>Color:</strong> a different color makes an element more conspicuous.</li>
+      <li><strong>Layout:</strong> a different arrangement or placement gives prominence to certain elements.</li>
+    </ul>
+    <form method="dialog"><button class="btn btn-ghost">Close</button></form>
+  </dialog>
 
-  <audio id="bg" loop></audio>
+  <audio id="bg" loop src="music/1-04.%20Want%20To%20Be%20Close%20-Reload-.mp3"></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     const $ = id => document.getElementById(id);
 
     // slides: one visible at a time, earlier ones sit above, later ones below
+    history.scrollRestoration = 'manual';
     const slides = [...document.querySelectorAll('.slide')];
     let cur = 0, busy, lastScroll = 0;
     function show(id, atBottom) {
@@ -240,7 +314,7 @@
     // mouse wheel: scroll inside a slide first, then move to the next or previous slide at its edge
     $('deck').addEventListener('wheel', e => {
       if (busy) return e.preventDefault();
-      if (document.querySelector('.modal.show')) return;
+      if (document.querySelector('dialog[open]')) return;
       const s = slides[cur], down = e.deltaY > 0, next = slides[cur + (down ? 1 : -1)];
       const atEdge = down ? s.scrollTop + s.clientHeight >= s.scrollHeight - 1 : s.scrollTop <= 0;
       if (atEdge && next && Date.now() - lastScroll > 200) show(next.id, !down);
@@ -248,11 +322,11 @@
 
     show(location.hash.slice(1));
 
-    // hero screen: each font type bounces off the edges on its own, changing color on every hit
+    // hero screen: each font type bounces off the edges on its own, changing shade on every hit
     const scr = $('screen');
-    const colors = ['#ffe69c', '#c77dff', '#4dd0e1', '#ff7eb6', '#7ee787', '#ffa94d'];
+    const colors = ['#fff', '#e0e0e0', '#8a8c93', '#62646a'];
     const words = [...document.querySelectorAll('.dvd')].map((el, i) => {
-      el.style.color = colors[i];
+      el.style.color = colors[i % colors.length];
       const a = 0.5 + i * 1.3, speed = 90 + i * 15;
       const w = { el, x: 40 + i * 110, y: 20 + i * 50, vx: Math.cos(a) * speed, vy: Math.sin(a) * speed, c: i };
       el.style.transform = `translate(${w.x}px, ${w.y}px)`;
@@ -278,32 +352,67 @@
     }
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(bounce);
 
-    // background music (set the src on the <audio> tag to an mp3)
+    // background music: starts from "Learn more" (browsers block autoplay), button toggles it, slider sets the volume
     const bg = $('bg'), pause = $('pause');
-    $('learn').onclick = () => { bg.play().catch(() => {}); pause.textContent = '❚❚'; };
-    pause.onclick = () => {
-      if (bg.paused) { bg.play().catch(() => {}); pause.textContent = '❚❚'; }
-      else { bg.pause(); pause.textContent = '▶︎'; }
-    };
+    bg.volume = $('volume').value;
+    bg.onplay = () => { pause.textContent = '❚❚'; pause.ariaLabel = 'Pause music'; };
+    bg.onpause = () => { pause.textContent = '▶︎'; pause.ariaLabel = 'Play music'; };
+    $('learn').onclick = () => bg.play().catch(() => {});
+    pause.onclick = () => bg.paused ? bg.play().catch(() => {}) : bg.pause();
+    $('volume').oninput = e => bg.volume = e.target.value;
 
-    // type modals + hierarchy toggle
-    $('typeModal').addEventListener('show.bs.modal', e => {
-      $('typeTitle').textContent = e.relatedTarget.dataset.name;
-      $('typeDesc').textContent = e.relatedTarget.dataset.desc;
-      $('typeSample').style.fontFamily = e.relatedTarget.dataset.font;
-    });
-    $('toggle').onclick = () => {
-      const h = $('hier');
-      h.style.fontFamily = h.style.fontFamily.includes('Merriweather') ? 'sans-serif' : "'Merriweather'";
-    };
+    // dialogs open from any [data-open] button; Close and Escape are native
+    document.querySelectorAll('[data-open]').forEach(b => b.onclick = () => $(b.dataset.open).showModal());
 
-    // playground
-    const t = $('target');
-    $('word').oninput = e => t.textContent = e.target.value || 'Sample word';
-    $('font').onchange = e => t.style.fontFamily = e.target.value;
-    document.querySelectorAll('.fbtn').forEach(b => b.onclick = () => t.style.fontFamily = b.dataset.f);
-    $('lh').oninput = e => t.style.lineHeight = e.target.value;
-    $('ls').oninput = e => t.style.letterSpacing = e.target.value + 'px';
+    // playground game: Generate picks a random word, font, leading and tracking for the Target; copy the word and match all three settings to win
+    const word = $('word'), fontSel = $('font'), lh = $('lh'), ls = $('ls'), target = $('target'), attempt = $('attempt');
+    const chaosWords = ['Serif', 'Kerning', 'Leading', 'Tracking', 'Typeface', 'Script', 'Baseline', 'Ligature', 'Typography', 'Font'];
+    const fonts = [...fontSel.options].slice(1).map(o => o.dataset.font);
+    const leadings = [1, 1.25, 1.5, 1.75, 2], trackings = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3];
+    const pick = list => list[Math.floor(Math.random() * list.length)];
+    let goal = null, playing = false, started = 0;
+
+    function render(box, text, font, leading, tracking) {
+      box.replaceChildren(text, document.createElement('br'), text);
+      box.style.fontFamily = font;
+      box.style.lineHeight = leading;
+      box.style.letterSpacing = tracking + 'em';
+    }
+    function setDisabled(off) { word.disabled = fontSel.disabled = lh.disabled = ls.disabled = off; }
+
+    function update() {
+      const font = fontSel.selectedOptions[0].dataset.font || '', leading = +lh.value, tracking = +ls.value, typed = word.value.trim();
+      $('lhv').textContent = leading;
+      $('lsv').textContent = tracking;
+      render(attempt, typed || 'Type', font, leading, tracking);
+      attempt.ariaLabel = `Your attempt: "${typed || 'Type'}" in ${font ? fontSel.value : 'no font selected'}, leading ${leading}, tracking ${tracking}em`;
+      if (!goal) return;
+      if (playing && typed === goal.word && font === goal.font && leading === goal.leading && tracking === goal.tracking) {
+        playing = false;
+        setDisabled(true);
+        $('result').textContent = `Match! Solved in ${((Date.now() - started) / 1000).toFixed(1)} seconds.`;
+      }
+    }
+
+    $('chaos').onclick = () => {
+      const prev = goal;
+      // re-roll so the sliders never start on the answer and the target always changes
+      do goal = { word: pick(chaosWords), font: pick(fonts), leading: pick(leadings), tracking: pick(trackings) };
+      while ((goal.leading === 1.5 && goal.tracking === 0) || (prev && prev.word === goal.word && prev.font === goal.font && prev.leading === goal.leading && prev.tracking === goal.tracking));
+      render(target, goal.word, goal.font, goal.leading, goal.tracking);
+      target.ariaLabel = `Target: the word "${goal.word}" set in a hidden font, leading and tracking`;
+      word.value = '';
+      fontSel.selectedIndex = 0;
+      lh.value = 1.5;
+      ls.value = 0;
+      setDisabled(false);
+      $('result').textContent = '';
+      playing = true;
+      started = Date.now();
+      update();
+    };
+    word.oninput = fontSel.onchange = lh.oninput = ls.oninput = update;
+    update();
   </script>
 </body>
 </html>
