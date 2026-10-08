@@ -1,0 +1,46 @@
+/* palette */
+[data-bs-theme=dark] {
+  --bs-body-bg: #131416; --bs-body-color: #8a8c93; --bs-secondary-color: #62646a; --bs-border-color: #26272c;
+  --bs-heading-color: #fff; --bs-emphasis-color: #fff; --bs-body-font-family: 'Inter', sans-serif; --bs-border-radius: 8px;
+}
+/* micro-typography: leading, kerning, tracking */
+body { font-family: 'Inter', sans-serif; line-height: 1.5; font-kerning: normal; }
+h1, h2, h3 { font-weight: 300; letter-spacing: -.02em; }
+.btn, .nav-link, label { letter-spacing: .03em; }
+.serif { display: block; font-family: 'Instrument Serif', serif; letter-spacing: 0; color: transparent; background: linear-gradient(90deg, #55575d, #b9bbc2); -webkit-background-clip: text; background-clip: text; }
+.navbar { background: rgba(19, 20, 22, .9); font-size: .85rem; --bs-navbar-color: #8a8c93; --bs-navbar-hover-color: #fff; --bs-navbar-active-color: #fff; --bs-navbar-brand-color: #fff; --bs-navbar-brand-font-size: 1rem; }
+.btn-ghost { font-size: .8rem; --bs-btn-color: #e0e0e0; --bs-btn-bg: #1f2024; --bs-btn-border-color: #383a42; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #2a2c30; --bs-btn-hover-border-color: #4b4a51; --bs-btn-active-color: #fff; --bs-btn-active-bg: #2a2c30; --bs-btn-active-border-color: #4b4a51; }
+.panel { border: 1px solid #26272c; border-radius: 16px; background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, .07), transparent 60%), #0a0a0a; }
+.tile { overflow: hidden; border: 1px solid #26272c; border-radius: 8px; background: #1a1b1f; color: #fff; font: inherit; transition: border-color .2s, transform .2s; }
+.tile:hover { border-color: #4b4a51; transform: translateY(-3px); }
+.demo { display: grid; place-items: center; height: 110px; border-bottom: 1px solid #26272c; background: #0a0a0a; color: #fff; font-size: 2.5rem; }
+.window { overflow: hidden; border: 1px solid #26272c; border-radius: 12px; background: #000; }
+.window-bar { padding: .4rem .8rem; background: #2a2c30; color: #62646a; font-size: .7rem; letter-spacing: .3em; }
+.eclipse { background: radial-gradient(circle at 72% 80%, #131416 0 36%, transparent 36.3%), radial-gradient(ellipse 34% 9% at 44% 52%, rgba(255, 255, 255, .13), transparent 70%), linear-gradient(#27282d, #131416 75%); }
+.glow { background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(255, 255, 255, .06), transparent 70%); }
+.gray { filter: grayscale(1); }
+.box { display: grid; place-items: center; min-height: 8.5rem; padding: 1rem; border: 1px dashed #4b4a51; border-radius: 8px; color: #fff; font-size: 1.5rem; line-height: 1.5; text-align: center; }
+.form-control:focus, .form-select:focus { border-color: #4b4a51; box-shadow: none; }
+.form-range::-webkit-slider-thumb { background: #fff; }
+.form-range::-moz-range-thumb { background: #fff; }
+.table { --bs-table-color: #8a8c93; }
+.table thead { --bs-table-bg: #1a1b1f; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+.table th { font-weight: 400; }
+dialog { max-width: min(32rem, 90vw); padding: 1.5rem; border: 1px solid #26272c; border-radius: 12px; background: #1a1b1f; color: #8a8c93; }
+dialog::backdrop { background: rgba(0, 0, 0, .6); }
+
+/* slides and motion (clip, not hidden, so the browser can never scroll the deck itself) */
+#deck { overflow: clip; }
+.slide { position: absolute; inset: 0; overflow-y: auto; visibility: hidden; transform: translateY(100%); transition: transform .6s ease, visibility 0s .6s; }
+.slide.above { transform: translateY(-100%); }
+.slide.active { transform: none; visibility: visible; transition-delay: 0s; }
+.slide.active .in { animation: up .6s ease-out both; animation-delay: calc(.3s + var(--i, 0) * .08s); }
+.slide.active .rise { display: block; animation: rise .8s ease-out both; }
+.fill { min-height: 100%; }
+.roll { display: inline-block; overflow: hidden; height: 1.5em; line-height: 1.5em; text-decoration: none; }
+.roll span { display: block; transition: transform .3s; }
+.roll span::after { content: attr(data-t); display: block; color: #fff; }
+.roll:hover span { transform: translateY(-50%); }
+@keyframes up { from { opacity: 0; transform: translateY(30px); } }
+@keyframes rise { from { opacity: 0; transform: translateY(60%); } }
+@media (prefers-reduced-motion: reduce) { .slide.active .in, .slide.active .rise { animation: none; } .slide { transition: none; } }
